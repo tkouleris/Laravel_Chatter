@@ -11,11 +11,11 @@ use App\Events\FormSubmited;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/chatter', function () {
     return view('chatter');
 });
 
@@ -27,3 +27,10 @@ Route::post('/sender', function () {
     $text = request()->text;
     event(new FormSubmited($text));
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

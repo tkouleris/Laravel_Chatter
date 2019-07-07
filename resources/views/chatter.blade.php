@@ -19,6 +19,9 @@
             channel.bind('form-submited', function(data) {
                 alert(JSON.stringify(data));
             });
+            channel.bind('user_login', function(user) {
+                alert(JSON.stringify(user));
+            });
         </script>
     </head>
 
