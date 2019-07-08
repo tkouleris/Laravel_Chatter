@@ -23,6 +23,8 @@ Route::get('/sender', function () {
     return view('sender');
 });
 
+Route::post('/send', 'MessageController@send')->name('send');
+
 Route::post('/sender', function () {
     $text = request()->text;
     event(new FormSubmited($text));

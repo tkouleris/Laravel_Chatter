@@ -6,29 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="description" content="" />
         <meta name="author" content="" />
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
         <title>BOOTSTRAP CHAT EXAMPLE</title>
         <!-- BOOTSTRAP CORE STYLE CSS -->
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
-        <script>
 
-            // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true;
-
-            var pusher = new Pusher('8a616bf0e905afe416d1', {
-                cluster: 'eu',
-                forceTLS: true
-            });
-
-            var channel = pusher.subscribe('my-channel');
-            channel.bind('form-submited', function(data) {
-                alert(JSON.stringify(data));
-            });
-            channel.bind('user_login', function(user) {
-                alert(JSON.stringify(user));
-            });
-        </script>
     </head>
 
     <body style="font-family:Verdana">
@@ -122,9 +106,9 @@
                         </div>
                         <div class="panel-footer">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter Message" />
+                                <input type="text" class="form-control" placeholder="Enter Message" id="txt_chat_message" />
                                 <span class="input-group-btn">
-                                    <button class="btn btn-info" type="button">SEND</button>
+                                    <button class="btn btn-info" type="button" id="btn_send_message">SEND</button>
                                 </span>
                             </div>
                         </div>
@@ -183,4 +167,51 @@
             </div>
         </div>
     </body>
+    <script>
+        $(document).ready(function() {
+            $('#btn_send_message').click(function(e){
+                e.preventDefault();
+
+                var message = $('#txt_chat_message').val();
+
+                $.ajaxSetup({
+                    headers:
+                    {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                jQuery.ajax({
+                    url: "send",
+                    method: 'post',
+                    data: {
+                        message: message
+                    },
+                    success: function(result)
+                    {
+
+                    },
+                    error: function (data)
+                    {
+                    // TODO: error message
+                    }
+                });
+            });
+        });
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('8a616bf0e905afe416d1', {
+                cluster: 'eu',
+                forceTLS: true
+            });
+
+            var channel = pusher.subscribe('my-channel');
+            channel.bind('form-submited', function(data) {
+                alert(JSON.stringify(data));
+            });
+            channel.bind('user_login', function(user) {
+                alert(JSON.stringify(user));
+            });
+        </script>
 </html>
