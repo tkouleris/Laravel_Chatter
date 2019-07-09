@@ -26,7 +26,7 @@
                             RECENT CHAT HISTORY
                         </div>
                         <div class="panel-body">
-                            <ul class="media-list">
+                            <ul class="media-list" id='messages'>
                                 <li class="media">
                                     <div class="media-body">
                                         <div class="media">
@@ -46,7 +46,7 @@
 
                                     </div>
                                 </li>
-                                <li class="media">
+                                {{-- <li class="media">
                                     <div class="media-body">
                                         <div class="media">
                                             <a class="pull-left" href="#">
@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                         <div class="panel-footer">
@@ -208,10 +208,24 @@
 
             var channel = pusher.subscribe('my-channel');
             channel.bind('form-submited', function(data) {
-                alert(JSON.stringify(data));
+                JSON.stringify(data);
+                $('#messages').append(
+                                "<li class='media'>"
+                                +"<div class='media-body'>"
+                                +"<div class='media' >"
+                                +"<a class='pull-left' href='#'"
+                                +"<img class='media-object img-circle' src='img/user.png' />"
+                                +"</a>"
+                                +"<div class='media-body'>"
+                                +data.text
+                                +"</div>"
+                                +"</div>"
+                                +"</div>"
+                                +"</li>"
+                );
             });
-            channel.bind('user_login', function(user) {
-                alert(JSON.stringify(user));
-            });
+            // channel.bind('user_login', function(user) {
+            //     alert(JSON.stringify(user));
+            // });
         </script>
 </html>
