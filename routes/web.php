@@ -15,15 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/chatter', function () {
-    return view('chatter');
-});
+
+Route::get('/chatter', 'ChatController@index')
+                            ->name('chatter')
+                            ->middleware('auth');
+
+// Route::get('/chatter', function () {
+//     return view('chatter');
+// });
 
 Route::get('/sender', function () {
     return view('sender');
 });
 
-Route::post('/send', 'MessageController@send')->name('send');
+Route::post('/send', 'MessageController@send')
+                                ->name('send')
+                                ->middleware('auth');
 
 Route::post('/sender', function () {
     $text = request()->text;
