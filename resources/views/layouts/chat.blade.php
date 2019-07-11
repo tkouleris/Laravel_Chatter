@@ -70,6 +70,7 @@
                 var created_at = data.message.created_at
                 var user = data.message.user.name
 
+
                 $('#messages').append(
                                 "<li class='media'>"
                                     + "<div class='media-body'>"
