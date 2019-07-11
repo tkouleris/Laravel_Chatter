@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{-- <!DOCTYPE html>
 <html>
 
     <head>
@@ -15,7 +15,9 @@
 
     </head>
 
-    <body style="font-family:Verdana">
+    <body style="font-family:Verdana"> --}}
+    @extends('layouts.chat')
+    @section('content')
         <div class="container">
             <div class="row " style="padding-top:40px;">
                 <h3 class="text-center" >Laravel Chatter App </h3>
@@ -166,7 +168,8 @@
                 </div>
             </div>
         </div>
-    </body>
+    @endsection
+    {{-- </body>
     <script>
         $(document).ready(function() {
             function clear_message_input()
@@ -237,4 +240,4 @@
             });
 
         </script>
-</html>
+</html> --}}
