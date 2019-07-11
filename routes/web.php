@@ -10,31 +10,6 @@
 |
 */
 
-
-
-// Route::get('/chatter', function () {
-//     return view('chatter');
-// });
-
-// Route::get('/sender', function () {
-//     return view('sender');
-// });
-
-
-
-// Route::post('/sender', function () {
-//     $text = request()->text;
-//     event(new FormSubmited($text));
-// });
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');
-
-
 Route::get('/', function () {
     return view('welcome');
 });

@@ -213,9 +213,10 @@
 
             var channel = pusher.subscribe('my-channel');
             channel.bind('form-submited', function(data) {
-
+                console.log(data)
                 var message = data.message.message
                 var created_at = data.message.created_at
+                var user = data.message.user.name
 
                 $('#messages').append(
                                 "<li class='media'>"
@@ -227,7 +228,7 @@
                                             + "<div class='media-body'>"
                                             + message
                                             + "<br />"
-                                            + "<small class='text-muted'>Alex Deo | "+created_at+"</small>"
+                                            + "<small class='text-muted'>" + user + " | " + created_at + "</small>"
                                             + "</div>"
                                         + "</div>"
                                     + "</div>"

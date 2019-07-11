@@ -11,8 +11,15 @@ class Message extends Model
      *
      * @var array
      */
-    protected $fillable = [
-                            'message',
-                            'user_id'
-                        ];
+    protected $fillable =
+                [
+                    'message',
+                    'user_id'
+                ];
+
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
