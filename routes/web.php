@@ -10,6 +10,31 @@
 |
 */
 
+
+
+// Route::get('/chatter', function () {
+//     return view('chatter');
+// });
+
+// Route::get('/sender', function () {
+//     return view('sender');
+// });
+
+
+
+// Route::post('/sender', function () {
+//     $text = request()->text;
+//     event(new FormSubmited($text));
+// });
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
+
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -19,26 +44,6 @@ Route::get('/chatter', 'ChatController@index')
                             ->name('chatter')
                             ->middleware('auth');
 
-// Route::get('/chatter', function () {
-//     return view('chatter');
-// });
-
-Route::get('/sender', function () {
-    return view('sender');
-});
-
 Route::post('/send', 'MessageController@send')
-                                ->name('send')
-                                ->middleware('auth');
-
-// Route::post('/sender', function () {
-//     $text = request()->text;
-//     event(new FormSubmited($text));
-// });
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
+                            ->name('send')
+                            ->middleware('auth');

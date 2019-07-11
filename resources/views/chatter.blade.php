@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <meta name="csrf-token" content="{{ csrf_token() }}" />
-        <title>BOOTSTRAP CHAT EXAMPLE</title>
+        <title>Laravel Chatter App</title>
         <!-- BOOTSTRAP CORE STYLE CSS -->
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
     <body style="font-family:Verdana">
         <div class="container">
             <div class="row " style="padding-top:40px;">
-                <h3 class="text-center" >BOOTSTRAP CHAT EXAMPLE </h3>
+                <h3 class="text-center" >Laravel Chatter App </h3>
                 <br /><br />
                 <div class="col-md-8">
                     <div class="panel panel-info">
@@ -169,10 +169,15 @@
     </body>
     <script>
         $(document).ready(function() {
+            function clear_message_input()
+            {
+                $('#txt_chat_message').val('');
+            }
             $('#btn_send_message').click(function(e){
                 e.preventDefault();
 
                 var message = $('#txt_chat_message').val();
+
 
                 $.ajaxSetup({
                     headers:
@@ -189,7 +194,7 @@
                     },
                     success: function(result)
                     {
-
+                        clear_message_input()
                     },
                     error: function (data)
                     {
