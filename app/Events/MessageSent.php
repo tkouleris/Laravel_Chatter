@@ -39,6 +39,6 @@ class MessageSent implements ShouldBroadcast
 
     public function broadcastAs()
     {
-        return 'form-submited';
+        return 'message_sent';
     }
 }
