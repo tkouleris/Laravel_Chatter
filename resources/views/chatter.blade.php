@@ -208,24 +208,27 @@
 
             var channel = pusher.subscribe('my-channel');
             channel.bind('form-submited', function(data) {
-                JSON.stringify(data);
+
+                var message = data.message.message
+                var created_at = data.message.created_at
+
                 $('#messages').append(
                                 "<li class='media'>"
-                                +"<div class='media-body'>"
-                                +"<div class='media' >"
-                                +"<a class='pull-left' href='#'"
-                                +"<img class='media-object img-circle' src='img/user.png' />"
-                                +"</a>"
-                                +"<div class='media-body'>"
-                                +data.text
-                                +"</div>"
-                                +"</div>"
-                                +"</div>"
-                                +"</li>"
+                                    + "<div class='media-body'>"
+                                        + "<div class='media' >"
+                                            + "<a class='pull-left' href='#'"
+                                                + "<img class='media-object img-circle' src='img/user.png' />"
+                                            + "</a>"
+                                            + "<div class='media-body'>"
+                                            + message
+                                            + "<br />"
+                                            + "<small class='text-muted'>Alex Deo | "+created_at+"</small>"
+                                            + "</div>"
+                                        + "</div>"
+                                    + "</div>"
+                                + "</li>"
                 );
             });
-            // channel.bind('user_login', function(user) {
-            //     alert(JSON.stringify(user));
-            // });
+
         </script>
 </html>

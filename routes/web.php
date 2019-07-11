@@ -1,5 +1,4 @@
 <?php
-use App\Events\FormSubmited;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,10 +31,10 @@ Route::post('/send', 'MessageController@send')
                                 ->name('send')
                                 ->middleware('auth');
 
-Route::post('/sender', function () {
-    $text = request()->text;
-    event(new FormSubmited($text));
-});
+// Route::post('/sender', function () {
+//     $text = request()->text;
+//     event(new FormSubmited($text));
+// });
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

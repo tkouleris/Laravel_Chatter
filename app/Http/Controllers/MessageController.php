@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Events\FormSubmited;
+use App\Events\MessageSent;
 use Illuminate\Support\Facades\Auth;
 use App\Message;
 
@@ -14,9 +14,9 @@ class MessageController extends Controller
         $message = request()->message;
         $user_id = Auth::id();
 
-        Message::create(['message'=>$message, 'user_id'=>$user_id]);
+        $new_message = Message::create(['message'=>$message, 'user_id'=>$user_id]);
 
-        event(new FormSubmited($message));
+        event(new MessageSent($new_message));
     }
 
 }
