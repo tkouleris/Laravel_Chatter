@@ -10,6 +10,7 @@
         <title>Laravel Chatter App</title>
         <!-- BOOTSTRAP CORE STYLE CSS -->
         <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/34d5e9a644.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 

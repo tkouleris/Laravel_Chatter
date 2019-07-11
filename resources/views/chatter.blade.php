@@ -45,6 +45,7 @@
                 </div>
                 <div class="col-md-4">
                     <div class="panel panel-primary">
+                        <a href="{{ url('/logout') }}"> <i class="fas fa-sign-out-alt"></i>Logout </a>
                         <div class="panel-heading">
                             ONLINE USERS
                         </div>

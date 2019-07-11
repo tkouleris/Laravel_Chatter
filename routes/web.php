@@ -22,3 +22,5 @@ Route::get('/chatter', 'ChatController@index')
 Route::post('/send', 'MessageController@send')
                             ->name('send')
                             ->middleware('auth');
+
+Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
