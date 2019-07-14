@@ -22,7 +22,7 @@
                                                 <div class="media-body" >
                                                     {{ $message->message }}
                                                     <br />
-                                                    <small class="text-muted">Alex Deo | {{ $message->created_at }}</small>
+                                                    <small class="text-muted">{{ $message->user->name }} | {{ $message->created_at }}</small>
                                                     <hr />
                                                 </div>
                                             </div>
