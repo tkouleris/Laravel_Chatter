@@ -844,7 +844,7 @@ Website: http://emilcarlsson.se/
 	<div class="content">
 		<div class="contact-profile">
 			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
-			<p>Harvey Specter</p>
+      <p>{{ Auth::user()->name  }}</p>
 			<div class="social-media">
 				<i class="fa fa-facebook" aria-hidden="true"></i>
 				<i class="fa fa-twitter" aria-hidden="true"></i>
@@ -853,7 +853,18 @@ Website: http://emilcarlsson.se/
 		</div>
 		<div class="messages">
 			<ul>
-				<li class="sent">
+          @foreach ($messages as $message )
+            @if( $message->user->id == $user_id)
+              <li class="sent">
+            @else
+              <li class="replies">
+            @endif
+              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+              <p>{{ $message->message }}</p>
+            </li>
+
+          @endforeach
+				{{-- <li class="sent">
 					<img src="http://emilcarlsson.se/assets/mikeross.png" alt="" />
 					<p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>
 				</li>
@@ -884,7 +895,8 @@ Website: http://emilcarlsson.se/
 				<li class="replies">
 					<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
 					<p>Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
-				</li>
+        </li> --}}
+
 			</ul>
 		</div>
 		<div class="message-input">
