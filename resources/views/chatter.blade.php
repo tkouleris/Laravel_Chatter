@@ -12,25 +12,24 @@
                         </div>
                         <div class="panel-body">
                             <ul class="media-list" id='messages'>
-                                <li class="media">
-                                    <div class="media-body">
-                                        <div class="media">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object img-circle " src="img/user.png" />
-                                            </a>
-                                            <div class="media-body" >
-                                                Donec sit amet ligula enim. Duis vel condimentum massa.
-                                                Donec sit amet ligula enim. Duis vel condimentum massa.Donec sit amet ligula enim.
-                                                Duis vel condimentum massa.
-                                                Donec sit amet ligula enim. Duis vel condimentum massa.
-                                                <br />
-                                                <small class="text-muted">Alex Deo | 23rd June at 5:00pm</small>
-                                                <hr />
+                                @foreach( $messages as $message)
+                                    <li class="media">
+                                        <div class="media-body">
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle " src="img/user.png" />
+                                                </a>
+                                                <div class="media-body" >
+                                                    {{ $message->message }}
+                                                    <br />
+                                                    <small class="text-muted">Alex Deo | {{ $message->created_at }}</small>
+                                                    <hr />
+                                                </div>
                                             </div>
-                                        </div>
 
-                                    </div>
-                                </li>
+                                        </div>
+                                    </li>
+                                @endforeach
                             </ul>
                         </div>
                         <div class="panel-footer">
