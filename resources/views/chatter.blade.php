@@ -711,17 +711,19 @@ Website: http://emilcarlsson.se/
 		</div>
 		<div id="contacts">
 			<ul>
-				<li class="contact">
-					<div class="wrap">
-						<span class="contact-status online"></span>
-						<img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-						<div class="meta">
-							<p class="name">Louis Litt</p>
-							<p class="preview">You just got LITT up, Mike.</p>
-						</div>
-					</div>
-				</li>
-				<li class="contact active">
+        @foreach ($logged_in_users as $user)
+          <li class="contact">
+            <div class="wrap">
+              <span class="contact-status online"></span>
+              <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+              <div class="meta">
+                <p class="name">{{ $user->name }}</p>
+              </div>
+            </div>
+          </li>
+        @endforeach
+
+				{{-- <li class="contact active">
 					<div class="wrap">
 						<span class="contact-status busy"></span>
 						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
@@ -810,7 +812,7 @@ Website: http://emilcarlsson.se/
 							<p class="preview"><span>You:</span> That's bullshit. This deal is solid.</p>
 						</div>
 					</div>
-				</li>
+				</li> --}}
 			</ul>
 		</div>
 		<div id="bottom-bar">
