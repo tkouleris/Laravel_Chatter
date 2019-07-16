@@ -715,7 +715,7 @@ Website: http://emilcarlsson.se/
           <li class="contact">
             <div class="wrap">
 
-              @if(\Carbon\Carbon::createFromTimeStamp(strtotime($user->last_activity_at))->floatDiffInMinutes() > 10)
+              @if( $user->time_since_last_activity('m') > 10)
                 <span class="contact-status away"></span>
               @else
                 <span class="contact-status online"></span>
@@ -724,7 +724,7 @@ Website: http://emilcarlsson.se/
               <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
               <div class="meta">
                 <p class="name">{{ $user->name }}</p>
-                <p class="preview">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->last_activity_at))->diffForHumans() }}</p>
+                <p class="preview">{{ $user->time_since_last_activity('h') }}</p>
               </div>
             </div>
           </li>
