@@ -714,10 +714,17 @@ Website: http://emilcarlsson.se/
         @foreach ($logged_in_users as $user)
           <li class="contact">
             <div class="wrap">
-              <span class="contact-status online"></span>
+
+              @if(\Carbon\Carbon::createFromTimeStamp(strtotime($user->last_activity_at))->floatDiffInMinutes() > 10)
+                <span class="contact-status away"></span>
+              @else
+                <span class="contact-status online"></span>
+              @endif
+
               <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
               <div class="meta">
                 <p class="name">{{ $user->name }}</p>
+                <p class="preview">{{ \Carbon\Carbon::createFromTimeStamp(strtotime($user->last_activity_at))->diffForHumans() }}</p>
               </div>
             </div>
           </li>
