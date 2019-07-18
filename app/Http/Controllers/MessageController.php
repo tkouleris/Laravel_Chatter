@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Events\MessageSent;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use App\User;
 use App\Message;
 
@@ -21,9 +20,7 @@ class MessageController extends Controller
                                         'user_id'=>$user_id
                                     ]);
 
-        $user = Auth::user();
-        $user->last_activity_at = Carbon::now()->toDateTimeString();
-        $user->save();
+
 
         event(new MessageSent($new_message));
     }

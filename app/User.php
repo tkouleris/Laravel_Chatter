@@ -44,6 +44,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Messages');
     }
 
+     /**
+     * Returns last users last activity
+     *
+     */
     public function time_since_last_activity( $option = null)
     {
         $last_activity = Carbon::createFromTimeStamp(strtotime($this->last_activity_at));
