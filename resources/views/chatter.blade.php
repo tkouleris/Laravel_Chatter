@@ -712,22 +712,24 @@ Website: http://emilcarlsson.se/
 		<div id="contacts">
 			<ul>
         @foreach ($logged_in_users as $user)
-          <li class="contact">
-            <div class="wrap">
+          @if( $user->time_since_last_activity('m') <= 120)
+            <li class="contact">
+              <div class="wrap">
 
-              @if( $user->time_since_last_activity('m') > 10)
-                <span class="contact-status away"></span>
-              @else
-                <span class="contact-status online"></span>
-              @endif
+                @if( $user->time_since_last_activity('m') > 1)
+                <span class="contact-status away" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status' ></span>
+                @else
+                  <span class="contact-status online" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status'  ></span>
+                @endif
 
-              <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
-              <div class="meta">
-                <p class="name">{{ $user->name }}</p>
-                <p class="preview">{{ $user->time_since_last_activity('h') }}</p>
+                <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                <div class="meta">
+                  <p class="name">{{ $user->name }}</p>
+                  <p class="preview" name="last_activity_user_{{ $user->id }}">{{ $user->time_since_last_activity('h') }}</p>
+                </div>
               </div>
-            </div>
-          </li>
+            </li>
+          @endif
         @endforeach
 
 				{{-- <li class="contact active">
@@ -958,6 +960,7 @@ var pusher = new Pusher('8a616bf0e905afe416d1', {
 
 var channel = pusher.subscribe('my-channel');
 
+// new message handler
 channel.bind('message_sent', function(data) {
   var message = data.message.message
   var created_at = data.message.created_at
@@ -974,5 +977,25 @@ channel.bind('message_sent', function(data) {
 	$('.contact.active .preview').html('<span>You: </span>' + message);
 	$(".messages").animate({ scrollTop: $(document).height() }, "fast");
 });
+
+// status change handler
+channel.bind('status_changed', function(data) {
+  console.log(data.user.time_since_last_activity_readable);
+  console.log(data.user.time_since_last_activity_minutes_diff);
+
+
+  var el_user_last_activity = $('[name=last_activity_user_' + data.user.id + ']');
+
+  el_user_last_activity.html(''); // clear
+  el_user_last_activity.html(data.user.time_since_last_activity_readable); // rewrite
+
+  var el_user_status = $('[name=user_' + data.user.id + '_status]') ;
+  if( !el_user_status.hasClass("online")){
+    el_user_status.removeClass("away");
+    el_user_status.addClass("online");
+  }
+});
+
+
 </script>
 </body></html>
