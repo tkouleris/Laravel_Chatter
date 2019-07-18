@@ -996,7 +996,6 @@ channel.bind('status_changed', function(data) {
       el_user_status.addClass("online");
     }
   }else{
-    console.log("contacts!!!!!!")
     $('#contacts_list_status').append(
                             "<li class='contact'>" +
                             "<div class='wrap'>" +
