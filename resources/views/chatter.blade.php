@@ -710,9 +710,9 @@ Website: http://emilcarlsson.se/
 			<input type="text" placeholder="Search contacts..." />
 		</div>
 		<div id="contacts">
-			<ul>
+			<ul id="contacts_list_status">
         @foreach ($logged_in_users as $user)
-          @if( $user->time_since_last_activity('m') <= 120)
+          @if( $user->time_since_last_activity('m') <= 1)
             <li class="contact">
               <div class="wrap">
 
@@ -980,20 +980,39 @@ channel.bind('message_sent', function(data) {
 
 // status change handler
 channel.bind('status_changed', function(data) {
-  console.log(data.user.time_since_last_activity_readable);
-  console.log(data.user.time_since_last_activity_minutes_diff);
-
-
-  var el_user_last_activity = $('[name=last_activity_user_' + data.user.id + ']');
-
-  el_user_last_activity.html(''); // clear
-  el_user_last_activity.html(data.user.time_since_last_activity_readable); // rewrite
 
   var el_user_status = $('[name=user_' + data.user.id + '_status]') ;
-  if( !el_user_status.hasClass("online")){
-    el_user_status.removeClass("away");
-    el_user_status.addClass("online");
+  console.log(el_user_status)
+  if(el_user_status.length > 0)
+  {
+    var el_user_last_activity = $('[name=last_activity_user_' + data.user.id + ']');
+
+    el_user_last_activity.html(''); // clear
+    el_user_last_activity.html(data.user.time_since_last_activity_readable); // rewrite
+
+
+    if( !el_user_status.hasClass("online")){
+      el_user_status.removeClass("away");
+      el_user_status.addClass("online");
+    }
+  }else{
+    console.log("contacts!!!!!!")
+    $('#contacts_list_status').append(
+                            "<li class='contact'>" +
+                            "<div class='wrap'>" +
+                            "<span class='contact-status online' name='user_" + data.user.id +"_status'  ></span>" +
+                            "<img src='http://emilcarlsson.se/assets/louislitt.png' alt='' />" +
+                            "<div class='meta'>" +
+                            "<p class='name'>"+data.user.name+"</p>" +
+                            "<p class='preview' name='last_activity_user_"+data.user.id+"'>"+data.user.time_since_last_activity_readable+"</p>" +
+                            "</div>" +
+                            "</div>" +
+                            "</li>"
+    );
   }
+
+
+
 });
 
 
