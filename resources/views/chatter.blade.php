@@ -702,11 +702,11 @@ Website: http://emilcarlsson.se/
 		<div id="contacts">
 			<ul id="contacts_list_status">
         @foreach ($logged_in_users as $user)
-          @if( ($user->time_since_last_activity('m') <= 120) || (Auth::id() == $user->id ) )
+          @if( ($user->time_since_last_activity('m') <= 1) || (Auth::id() == $user->id ) )
             <li class="contact">
               <div class="wrap">
 
-                @if( $user->time_since_last_activity('m') > 1)
+                @if( $user->time_since_last_activity('m') > 60 )
                   <span class="contact-status away" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status' ></span>
                 @else
                   <span class="contact-status online" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status'  ></span>
@@ -1011,7 +1011,23 @@ channel.bind('status_changed', function(data) {
 
 // status change handler
 channel.bind('user_login', function(data) {
-  console.log(data);
+  var el_user_status = $('[name=user_' + data.user.id + '_status]') ;
+
+  if(el_user_status.length == 0){
+    $('#contacts_list_status').append(
+                            "<li class='contact'>" +
+                            "<div class='wrap'>" +
+                            "<span class='contact-status online' name='user_"
+                              + data.user.id +"_status'  ></span>" +
+                            "<img src='http://emilcarlsson.se/assets/louislitt.png' alt='' />" +
+                            "<div class='meta'>" +
+                            "<p class='name'>"+data.user.name+"</p>" +
+                            "<p class='preview' name='last_activity_user_"
+                            +data.user.id+"'>"+data.user.time_since_last_activity_readable+"</p>" +
+                            "</div>" +
+                            "</div>" +
+                            "</li>");
+  }
 });
 
 
