@@ -1007,9 +1007,11 @@ channel.bind('status_changed', function(data) {
                             "</li>"
     );
   }
+});
 
-
-
+// status change handler
+channel.bind('user_login', function(data) {
+  console.log(data);
 });
 
 

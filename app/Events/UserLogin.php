@@ -9,20 +9,25 @@ use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use App\User;
 
 class UserLogin implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    protected $username;
+    public $user = array();
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($username)
+    public function __construct($user)
     {
-        $this->username = $username;
+        $user = User::where('id','=',$user->id)->first();
+        $this->user['time_since_last_activity_readable'] = $user->time_since_last_activity('h');
+        $this->user['time_since_last_activity_minutes_diff'] = $user->time_since_last_activity('m');
+        $this->user['id'] = $user->id;
+        $this->user['name'] = $user->name;
     }
 
     /**
