@@ -708,11 +708,11 @@ Website: http://emilcarlsson.se/
 		<div id="contacts">
 			<ul id="contacts_list_status">
         @foreach ($logged_in_users as $user)
-          @if( ($user->time_since_last_activity('m') <= 1) || (Auth::id() == $user->id ) )
+          @if( ($user->time_since_last_activity('m') <= 90) || (Auth::id() == $user->id ) )
             <li class="contact">
               <div class="wrap">
 
-                @if( $user->time_since_last_activity('m') > 60 )
+                @if( $user->time_since_last_activity('m') > 5 )
                   <span class="contact-status away" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status' ></span>
                 @else
                   <span class="contact-status online" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status'  ></span>
