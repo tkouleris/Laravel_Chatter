@@ -24,3 +24,5 @@ Route::post('/send', 'MessageController@send')
                             ->middleware('auth');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
+
+Route::post('profile', 'UserController@update_avatar');

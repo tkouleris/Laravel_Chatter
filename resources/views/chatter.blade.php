@@ -9,6 +9,12 @@
 {{-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'> --}}
 <link rel='stylesheet prefetch' href="{{ asset('css/reset.min.css') }}" >
 <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+<!-- jQuery Modal -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+<!-- Latest compiled and minified CSS -->
 <style class="cp-pen-styles">body {
   display: flex;
   align-items: center;
@@ -712,7 +718,8 @@ Website: http://emilcarlsson.se/
                   <span class="contact-status online" data-userid='{{ $user->id }}' name='user_{{ $user->id }}_status'  ></span>
                 @endif
 
-                <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" />
+                {{-- <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" /> --}}
+                <img src="storage/avatars/{{ $user->avatar }}" alt="" />
                 <div class="meta">
                   <p class="name">{{ $user->name }}</p>
                   <p class="preview" name="last_activity_user_{{ $user->id }}">{{ $user->time_since_last_activity('h') }}</p>
@@ -815,7 +822,11 @@ Website: http://emilcarlsson.se/
 			</ul>
 		</div>
 		<div id="bottom-bar">
-			<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+      <button id="addcontact">
+        <a href="#upload_avatar" rel="modal:open" style="color:#E6EAEA;text-decoration: none;">
+          <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>Change Avatar
+        </a>
+      </button>
 			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
 		</div>
 	</div>
@@ -852,6 +863,22 @@ Website: http://emilcarlsson.se/
 		</div>
 	</div>
 </div>
+
+
+<!-- Modal HTML embedded directly into document -->
+<div id="upload_avatar" class="modal">
+
+  <form action="/profile" method="post" enctype="multipart/form-data">
+    @csrf
+    <div class="form-group">
+        <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp">
+        <small id="fileHelp" class="form-text text-muted">Please upload a valid image file. Size of image should not be more than 2MB.</small>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script><script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script >
 
