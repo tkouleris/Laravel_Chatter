@@ -28,6 +28,7 @@ class UserLogin implements ShouldBroadcast
         $this->user['time_since_last_activity_minutes_diff'] = $user->time_since_last_activity('m');
         $this->user['id'] = $user->id;
         $this->user['name'] = $user->name;
+        $this->user['avatar'] = $user->avatar;
     }
 
     /**

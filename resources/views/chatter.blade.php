@@ -20,7 +20,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: #27ae60;
+  background: #808080;
   font-family: "proxima-nova", "Source Sans Pro", sans-serif;
   font-size: 1em;
   letter-spacing: 0.1px;
@@ -701,9 +701,8 @@ Website: http://emilcarlsson.se/
 <input type='hidden' value='{{ $user_id }}' name='user_id' />
 <div id="frame">
 	<div id="sidepanel">
-		<div id="search">
-			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
-			<input type="text" placeholder="Search contacts..." />
+		<div id="search" style='padding-top:5px;padding-bottom:5px;'>
+      <p style='text-align:center;font-weight:bold;font-size=40px;'>User List</p>
 		</div>
 		<div id="contacts">
 			<ul id="contacts_list_status">
@@ -827,12 +826,11 @@ Website: http://emilcarlsson.se/
           <i class="fa fa-user-plus fa-fw" aria-hidden="true"></i>Change Avatar
         </a>
       </button>
-			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
 		</div>
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-      <img src="/storage/avatars/{{ Auth::user()->avatar }}" alt="" />
+      <img src="storage/avatars/{{ Auth::user()->avatar }}" alt="" />
       <p>{{ Auth::user()->name  }}</p>
 			<div class="social-media">
 				<a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -846,7 +844,7 @@ Website: http://emilcarlsson.se/
             @else
               <li class="replies">
             @endif
-              <img src="/storage/avatars/{{ $message->user->avatar }}" alt="" />
+              <img src="storage/avatars/{{ $message->user->avatar }}" alt="" />
               <p>{{ $message->message }}</p>
             </li>
 
@@ -857,7 +855,6 @@ Website: http://emilcarlsson.se/
 		<div class="message-input">
 			<div class="wrap">
 			<input type="text" placeholder="Write your message..." />
-			<i class="fa fa-paperclip attachment" aria-hidden="true"></i>
 			<button class="submit" id='btn_send_message'><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 			</div>
 		</div>
@@ -981,17 +978,18 @@ channel.bind('message_sent', function(data) {
   var message = data.message.message
   var created_at = data.message.created_at
   var user = data.message.user.name
+  var avatar = data.message.user.avatar
   var msg_user_id = data.message.user.id
   var logged_in_user_id = $('input[name=user_id]').val();
 
   if( logged_in_user_id == msg_user_id){
-    $('<li class="sent"><img src="/storage/avatars/"'+user.avatar+'" alt="" /><p>'
+    $('<li class="sent"><img src="storage/avatars/'+avatar+'" alt="" /><p>'
         + message +
       '</p></li>').appendTo($('.messages ul'));
   }
 
   if( logged_in_user_id != msg_user_id){
-    $('<li class="replies"><img src=src="/storage/avatars/"'+user.avatar+'" alt="" /><p>'
+    $('<li class="replies"><img src="storage/avatars/'+avatar+'" alt="" /><p>'
         + message +
       '</p></li>').appendTo($('.messages ul'));
   }
@@ -1019,12 +1017,13 @@ channel.bind('status_changed', function(data) {
       el_user_status.addClass("online");
     }
   }else{
+
     $('#contacts_list_status').append(
                             "<li class='contact'>" +
                             "<div class='wrap'>" +
                             "<span class='contact-status online' name='user_"
                               + data.user.id +"_status'  ></span>" +
-                            "<img src='/storage/avatars/"+user.avatar+"' alt='' />" +
+                            "<img src='storage/avatars/"+data.user.avatar+"' alt='' />" +
                             "<div class='meta'>" +
                             "<p class='name'>"+data.user.name+"</p>" +
                             "<p class='preview' name='last_activity_user_"
@@ -1041,12 +1040,13 @@ channel.bind('user_login', function(data) {
   var el_user_status = $('[name=user_' + data.user.id + '_status]') ;
 
   if(el_user_status.length == 0){
+
     $('#contacts_list_status').append(
                             "<li class='contact'>" +
                             "<div class='wrap'>" +
                             "<span class='contact-status online' name='user_"
                               + data.user.id +"_status'  ></span>" +
-                            "<img src='/storage/avatars/"+user.avatar+"' alt='' />" +
+                            "<img src='storage/avatars/"+data.user.avatar+"' alt='' />" +
                             "<div class='meta'>" +
                             "<p class='name'>"+data.user.name+"</p>" +
                             "<p class='preview' name='last_activity_user_"
