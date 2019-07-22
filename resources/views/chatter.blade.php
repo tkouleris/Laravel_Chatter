@@ -732,7 +732,7 @@ Website: http://emilcarlsson.se/
 				{{-- <li class="contact active">
 					<div class="wrap">
 						<span class="contact-status busy"></span>
-						<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+						<img src=src="/storage/avatars/"'+user.avatar+'" alt="" />
 						<div class="meta">
 							<p class="name">Harvey Specter</p>
 							<p class="preview">Wrong. You take the gun, or you pull out a bigger one. Or, you call their bluff. Or, you do any one of a hundred and forty six other things.</p>
@@ -832,7 +832,7 @@ Website: http://emilcarlsson.se/
 	</div>
 	<div class="content">
 		<div class="contact-profile">
-			<img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+      <img src="/storage/avatars/{{ Auth::user()->avatar }}" alt="" />
       <p>{{ Auth::user()->name  }}</p>
 			<div class="social-media">
 				<a href="logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
@@ -846,7 +846,7 @@ Website: http://emilcarlsson.se/
             @else
               <li class="replies">
             @endif
-              <img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+              <img src="/storage/avatars/{{ $message->user->avatar }}" alt="" />
               <p>{{ $message->message }}</p>
             </li>
 
@@ -985,13 +985,13 @@ channel.bind('message_sent', function(data) {
   var logged_in_user_id = $('input[name=user_id]').val();
 
   if( logged_in_user_id == msg_user_id){
-    $('<li class="sent"><img src="http://emilcarlsson.se/assets/mikeross.png" alt="" /><p>'
+    $('<li class="sent"><img src="/storage/avatars/"'+user.avatar+'" alt="" /><p>'
         + message +
       '</p></li>').appendTo($('.messages ul'));
   }
 
   if( logged_in_user_id != msg_user_id){
-    $('<li class="replies"><img src="http://emilcarlsson.se/assets/harveyspecter.png" alt="" /><p>'
+    $('<li class="replies"><img src=src="/storage/avatars/"'+user.avatar+'" alt="" /><p>'
         + message +
       '</p></li>').appendTo($('.messages ul'));
   }
@@ -1024,7 +1024,7 @@ channel.bind('status_changed', function(data) {
                             "<div class='wrap'>" +
                             "<span class='contact-status online' name='user_"
                               + data.user.id +"_status'  ></span>" +
-                            "<img src='http://emilcarlsson.se/assets/louislitt.png' alt='' />" +
+                            "<img src='/storage/avatars/"+user.avatar+"' alt='' />" +
                             "<div class='meta'>" +
                             "<p class='name'>"+data.user.name+"</p>" +
                             "<p class='preview' name='last_activity_user_"
@@ -1046,7 +1046,7 @@ channel.bind('user_login', function(data) {
                             "<div class='wrap'>" +
                             "<span class='contact-status online' name='user_"
                               + data.user.id +"_status'  ></span>" +
-                            "<img src='http://emilcarlsson.se/assets/louislitt.png' alt='' />" +
+                            "<img src='/storage/avatars/"+user.avatar+"' alt='' />" +
                             "<div class='meta'>" +
                             "<p class='name'>"+data.user.name+"</p>" +
                             "<p class='preview' name='last_activity_user_"
