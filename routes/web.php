@@ -11,6 +11,12 @@
 */
 
 Route::get('/', function () {
+
+    if($user = Auth::user())
+    {
+        return redirect()->route('chatter');
+    }
+
     return view('welcome');
 });
 
