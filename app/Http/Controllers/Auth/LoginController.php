@@ -5,9 +5,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-use Carbon\Carbon;
+
 use App\Events\UserLogin;
 use App\User;
+
 
 class LoginController extends Controller
 {
@@ -51,8 +52,8 @@ class LoginController extends Controller
             // Wrong implementation, needs to change
             $user_id = $this->guard()->user()->id;
             $logged_in_user = User::where('id','=',$user_id)->first();
-            $logged_in_user->last_activity_at = Carbon::now()->toDateTimeString();
-            $logged_in_user->save();
+            // $logged_in_user->last_activity_at = Carbon::now()->toDateTimeString();
+            // $logged_in_user->save();
 
             event( new UserLogin( $logged_in_user ) );
 
