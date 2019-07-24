@@ -1,7 +1,7 @@
 <!DOCTYPE html><html class=''>
 <head>
 <meta name="csrf-token" content="{{ csrf_token() }}" />
-
+<title>Chatter - A Laravel App</title>
 <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
 <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
 <script src="https://use.typekit.net/hoy3lrg.js"></script>
