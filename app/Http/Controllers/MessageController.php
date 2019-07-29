@@ -15,10 +15,11 @@ class MessageController extends Controller
         $message = request()->message;
         $user_id = Auth::id();
 
-        $new_message = Message::create([
-                                        'message'=>$message,
-                                        'user_id'=>$user_id
-                                    ]);
+        $new_message = Message::create(
+                                [
+                                    'message'=>$message,
+                                    'user_id'=>$user_id
+                                ]);
 
 
 
