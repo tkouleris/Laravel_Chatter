@@ -32,4 +32,4 @@ Route::post('/send', 'MessageController@send')
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
-Route::post('profile', 'UserController@update_avatar');
+Route::post('profile', 'UserController@update_avatar')->middleware('auth');
