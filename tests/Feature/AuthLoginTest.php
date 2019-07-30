@@ -23,4 +23,17 @@ class AuthLoginTest extends TestCase
         $response = $this->actingAs($user)->get('/login');
         $response->assertRedirect('/chatter');
     }
+
+    public function test_user_can_login_with_correct_credentials()
+    {
+        $user = factory(\App\User::class)->create([
+            'password' => bcrypt($password = 'i-love-laravel'),
+        ]);
+        $response = $this->post('/login', [
+            'name' => $user->name,
+            'password' => $password,
+        ]);
+        $response->assertRedirect('/chatter');
+        $this->assertAuthenticatedAs($user);
+    }
 }
