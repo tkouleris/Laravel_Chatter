@@ -49,11 +49,8 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             $request->session()->put('key', 'value');
 
-            // Wrong implementation, needs to change
             $user_id = $this->guard()->user()->id;
             $logged_in_user = User::where('id','=',$user_id)->first();
-            // $logged_in_user->last_activity_at = Carbon::now()->toDateTimeString();
-            // $logged_in_user->save();
 
             event( new UserLogin( $logged_in_user ) );
 
