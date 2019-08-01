@@ -36,4 +36,14 @@ class AuthLoginTest extends TestCase
         $response->assertRedirect('/chatter');
         $this->assertAuthenticatedAs($user);
     }
+
+    public function test_user_cannot_login_with_wrong_credentials()
+    {
+        $response = $this->post('/login', [
+            'name' => 'no_user',
+            'password' => 'wrong_password',
+        ]);
+        $response->assertStatus(302);
+        $response->assertRedirect('/');
+    }
 }
