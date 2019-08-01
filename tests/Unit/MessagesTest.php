@@ -10,14 +10,8 @@ use App\User;
 
 class MessagesTest extends TestCase
 {
+    //use WithoutMiddleware;
 
-    use WithoutMiddleware;
-    //use RefreshDatabase;
-    /**
-     * A basic test example.
-     *
-     * @return void
-     */
     public function test_a_message_can_be_stored_in_database()
     {
         $this->withoutExceptionHandling();
@@ -31,5 +25,22 @@ class MessagesTest extends TestCase
         ]);
 
         $response->assertOK();
+    }
+
+    public function test_a_message_can_change_user_last_active_at_field()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = \App\User::find(1);
+        $timestamp_before_message = $user->last_activity_at;
+        $this->be($user);
+
+        $response = $this->post('/send',[
+            'message'=>'PHPUnit Testing Message',
+        ]);
+
+        $timestamp_after_message = $user->last_activity_at;
+
+        $this->assertNotEquals($timestamp_before_message, $timestamp_after_message );
     }
 }
